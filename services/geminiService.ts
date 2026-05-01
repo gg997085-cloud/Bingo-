@@ -2,13 +2,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { LOCAL_BINGO_CALLS } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
 export const getBingoCommentary = async (number: number): Promise<string> => {
   // Always have the local fallback ready
   const localCall = LOCAL_BINGO_CALLS[number] || `Number ${number}!`;
 
-  if (!process.env.API_KEY) return localCall;
+  if (!process.env.GEMINI_API_KEY) return localCall;
 
   try {
     const response = await ai.models.generateContent({
@@ -29,7 +29,7 @@ export const getBingoCommentary = async (number: number): Promise<string> => {
 export const getWinCelebration = async (name: string): Promise<string> => {
   const fallback = `BINGO! ${name === 'YOU' ? 'You are' : name + ' is'} the champion!`;
   
-  if (!process.env.API_KEY) return fallback;
+  if (!process.env.GEMINI_API_KEY) return fallback;
 
   try {
     const response = await ai.models.generateContent({

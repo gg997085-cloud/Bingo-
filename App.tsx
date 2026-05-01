@@ -25,7 +25,7 @@ const App: React.FC = () => {
     rivals: []
   });
 
-  const [isOfflineMode] = useState(!process.env.API_KEY);
+  const [isOfflineMode] = useState(!process.env.GEMINI_API_KEY);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const prngRef = useRef<() => number>(() => Math.random());
 
